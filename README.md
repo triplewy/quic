@@ -7,6 +7,7 @@ Accurately benchmark multiple QUIC implementations to find areas of improvement.
 ## Benchmark Scenarios
 
 ![Test Parameters](./static/parameters.png)
+
 Source: [Taking a Long Look at QUIC (Sigcomm '17)](https://conferences.sigcomm.org/imc/2017/papers/imc17-final39.pdf)
 
 For this benchmark, we will be ignoring **proxy**, **clients**, and **video quality** parameters. Network behavior will be emulated on local loopback interface using ```tc``` and ```netem```. 
@@ -29,9 +30,7 @@ Other types of scenarios? Namely video streaming? Would be difficult to implemen
 - Benchmarks should be automated
 - Web pages will be populated by images of various sizes depending on benchmark
 
-> For Chrome, we evaluate QUIC performance using web pages consisting of static HTML that references JPG images (various number and sizes of images) without any other object dependencies or scripts. While previous work demonstrates that many factors impact load times and user-perceived performance for typical, popular
-web pages [4, 33, 39], the focus of this work is only on transport protocol performance. Our choice of simple pages ensures that page
-load time measurements reflect only the efficiency of the transport protocol and not browser-induced factors such as script loading and execution time. Furthermore, our simple web pages are essential for isolating the impact of parameters such as size and number of
+> For Chrome, we evaluate QUIC performance using web pages consisting of static HTML that references JPG images (various number and sizes of images) without any other object dependencies or scripts. While previous work demonstrates that many factors impact load times and user-perceived performance for typical, popular web pages [4, 33, 39], the focus of this work is only on transport protocol performance. Our choice of simple pages ensures that page load time measurements reflect only the efficiency of the transport protocol and not browser-induced factors such as script loading and execution time. Furthermore, our simple web pages are essential for isolating the impact of parameters such as size and number of
 objects on QUIC multiplexing. We leave investigating the effect of dynamic pages on performance for future work.
 
 Source: [Taking a Long Look at QUIC (Sigcomm '17)](https://conferences.sigcomm.org/imc/2017/papers/imc17-final39.pdf)
@@ -43,6 +42,8 @@ Source: [Taking a Long Look at QUIC (Sigcomm '17)](https://conferences.sigcomm.o
 State Machine Analysis by instrumenting Quic implementations with logs. Most likely will be quite time-consuming but could prove very useful for anaylsis.
 
 ![statemchine](static/statemachine.png)
+
+Source: [Taking a Long Look at QUIC (Sigcomm '17)](https://conferences.sigcomm.org/imc/2017/papers/imc17-final39.pdf)
 
 A diagram like the one above would be nice but might be out of scope for an individual project.
 
