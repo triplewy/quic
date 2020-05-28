@@ -1,8 +1,18 @@
-# Quic-HTTP/3 Benchamark
+# QUIC-HTTP/3 Benchamark
 
 ## Purpose
 
 Accurately benchmark multiple QUIC implementations to find areas of improvement. Benchmarks are focused on performance rather than accuracy of implementations compared to IETF draft.
+
+## Related Works
+
+Litespeed have open sourced their own QUIC [benchmarks](https://github.com/litespeedtech/lsquic). 
+
+Another open sourced QUIC [benchmark](https://github.com/Shenggan/quic_vs_tcp)
+
+Great paper about robust QUIC benchmarking methodology: [Taking a Long Look at QUIC (Sigcomm '17)](https://conferences.sigcomm.org/imc/2017/papers/imc17-final39.pdf)
+
+Overall, there is no comprehensive, open-sourced QUIC/HTTP3 benchmark that compares multiple QUIC server implementations.
 
 ## Benchmark Scenarios
 
@@ -21,12 +31,12 @@ For this benchmark, we will be ignoring **proxy**, **clients**, and **video qual
   - Number of objects (images)
   - Object sizes (image sizes)
 
-Other types of scenarios? Namely video streaming? Would be difficult to implement optimized/consistent video streaming application across multiple implementations of Quic
+Other types of scenarios? Namely video streaming? Would be difficult to implement optimized/consistent video streaming application across multiple implementations of QUIC
 
 ## Measuring Results
 
-- Repeat each scenario 10 times for each Quic server implementation
-- Chromium Quic client will be used for all benchmarks. Will turn off caching
+- Repeat each scenario 10 times for each QUIC server implementation
+- Chromium QUIC client will be used for all benchmarks. Will turn off caching
 - Benchmarks should be automated
 - Web pages will be populated by images of various sizes depending on benchmark
 
@@ -39,7 +49,7 @@ Source: [Taking a Long Look at QUIC (Sigcomm '17)](https://conferences.sigcomm.o
 
 ## Instrumentation (Optional)
 
-State Machine Analysis by instrumenting Quic implementations with logs. Most likely will be quite time-consuming but could prove very useful for anaylsis.
+State Machine Analysis by instrumenting QUIC implementations with logs. Most likely will be quite time-consuming but could prove very useful for anaylsis.
 
 ![statemchine](static/statemachine.png)
 
@@ -60,20 +70,20 @@ A diagram like the one above would be nice but might be out of scope for an indi
 - Mozilla: [neqo](https://github.com/mozilla/neqo)
 - Litespeed: [lsquic](https://github.com/litespeedtech/lsquic)
 
-There are many more Quic implementations listed [here](https://github.com/quicwg/base-drafts/wiki/Implementations) 
+There are many more QUIC implementations listed [here](https://github.com/quicwg/base-drafts/wiki/Implementations) 
 
 ## Discussion
 
-- Benchmark multiple Quic clients as well?
+- Benchmark multiple QUIC clients as well?
   - For instance, I'd imagine mvfst's client is optimized to work with mvfst's server
 - Benchmark congestion window handling? 
 - How to ensure statistical significance between results? 
-- Will ample configuration be required for each Quic implementation?
+- Will ample configuration be required for each QUIC implementation?
 
 
 ## Timeline
 
-1. Get Quic/HTTP3 servers up and running for at least 3 different implementations
+1. Get QUIC/HTTP3 servers up and running for at least 3 different implementations
 2. Create example web pages for each experiment
-3. Measure PLTs for each Quic server without any network manipulation
+3. Measure PLTs for each QUIC server without any network manipulation
 4. TBD
