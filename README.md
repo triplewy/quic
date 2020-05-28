@@ -11,6 +11,16 @@ Source: [Taking a Long Look at QUIC (Sigcomm '17)](https://conferences.sigcomm.o
 
 For this benchmark, we will be ignoring **proxy**, **clients**, and **video quality** parameters. Network behavior will be emulated on local loopback interface using ```tc``` and ```netem```. 
 
+### Parameters
+- Network Emulation
+  - Rate limits
+  - Extra Delay
+  - Extra Loss
+- Web Page
+  - Number of objects (images)
+  - Object sizes (image sizes)
+
+Other types of scenarios? Namely video streaming? Would be difficult to implement optimized/consistent video streaming application across multiple implementations of Quic
 
 ## Measuring Results
 
@@ -30,8 +40,11 @@ Source: [Taking a Long Look at QUIC (Sigcomm '17)](https://conferences.sigcomm.o
 
 ## Instrumentation (Optional)
 
-State Machine Analysis by instrumenting Quic implementations with logs. Most likely will be quite time-consuming.
+State Machine Analysis by instrumenting Quic implementations with logs. Most likely will be quite time-consuming but could prove very useful for anaylsis.
 
+![statemchine](static/statemachine.png)
+
+A diagram like the one above would be nice but might be out of scope for an individual project.
 
 ## Implementations
 
@@ -40,10 +53,26 @@ State Machine Analysis by instrumenting Quic implementations with logs. Most lik
 
 
 ### Server
-- Facebook: [mvfst](https://github.com/facebookincubator/mvfst)
+- Facebook: [mvfst](https://github.com/facebookincubator/mvfst)/[proxygen](https://github.com/facebook/proxygen)
 - Microsoft: [msquic](https://github.com/microsoft/msquic)
 - Google: [chromium](https://www.chromium.org/quic/playing-with-quic)
 - Mozilla: [neqo](https://github.com/mozilla/neqo)
 - Litespeed: [lsquic](https://github.com/litespeedtech/lsquic)
 
 There are many more Quic implementations listed [here](https://github.com/quicwg/base-drafts/wiki/Implementations) 
+
+## Discussion
+
+- Benchmark multiple Quic clients as well?
+  - For instance, I'd imagine mvfst's client is optimized to work with mvfst's server
+- Benchmark congestion window handling? 
+- How to ensure statistical significance between results? 
+- Will ample configuration be required for each Quic implementation?
+
+
+## Timeline
+
+1. Get Quic/HTTP3 servers up and running for at least 3 different implementations
+2. Create example web pages for each experiment
+3. Measure PLTs for each Quic server without any network manipulation
+4. TBD
