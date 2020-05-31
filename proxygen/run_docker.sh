@@ -2,9 +2,9 @@
 
 docker stop proxygen
 docker rm proxygen
-docker build . -t proxygen
 docker run \
 --name proxygen \
---port 443:443 \
+-p 30000:443/udp \
 -v $HOME/quic/www:/www \
+-d \
 proxygen

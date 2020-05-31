@@ -5,7 +5,7 @@ set -x
 set -o nounset
 
 DRAFT=28
-HQ_CLI=/proxygen/proxygen/_build/proxygen/httpserver/hq
+HQ_CLI=/hq
 PORT=443
 LOGLEVEL=4
 
@@ -31,7 +31,7 @@ ${HQ_CLI} \
 --draft-version=${DRAFT} \
 --logdir=/logs \
 --qlogger_path=/logs \
---host=server \
---congestion=bbr \
+--host=127.0.0.1 \
+--congestion=cubic \
 --pacing=true \
 --v=${LOGLEVEL} 2>&1 | tee /logs/server.log
