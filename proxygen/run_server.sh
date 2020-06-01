@@ -4,10 +4,12 @@
 set -x
 set -o nounset
 
-DRAFT=28
+DRAFT=27
 HQ_CLI=/hq
-PORT=443
+PORT=4433
 LOGLEVEL=4
+ROOT_DIR=/www
+CERTS_DIR=/certs
 
 # Unless noted otherwise, test cases use HTTP/0.9 for file transfers.
 PROTOCOL="hq-${DRAFT}"
@@ -26,12 +28,14 @@ ${HQ_CLI} \
 --port=${PORT} \
 --httpversion=${HTTPVERSION} \
 --h2port=${PORT} \
---static_root=/www \
+--static_root=${ROOT_DIR} \
 --use_draft=true \
 --draft-version=${DRAFT} \
 --logdir=/logs \
 --qlogger_path=/logs \
---host=127.0.0.1 \
+--host=0.0.0.0 \
 --congestion=cubic \
 --pacing=true \
+--key=${CERTS_DIR}/leaf_cert.key \
+--cert=${CERTS_DIR}/leaf_cert.pem \
 --v=${LOGLEVEL} 2>&1 | tee /logs/server.log
