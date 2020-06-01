@@ -15,6 +15,7 @@ RUN rm libs.tar
 
 # Create the logs directory
 RUN mkdir /logs
+RUN mkdir /qlog
 
 COPY run_server.sh .
 RUN chmod +x run_server.sh

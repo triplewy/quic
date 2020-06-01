@@ -7,4 +7,6 @@ PORT=$1
 --quic-version=h3-27 \
 --allow-insecure-localhost \
 --origin-to-force-quic-on=127.0.0.1:$PORT \
-https://127.0.0.1:$PORT/10kb/index-10.html
+--disk-cache-dir=/dev/null \
+--disk-cache-size=1 \
+https://127.0.0.1:$PORT/10kb/index-100.html

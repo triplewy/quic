@@ -32,7 +32,7 @@ ${HQ_CLI} \
 --use_draft=true \
 --draft-version=${DRAFT} \
 --logdir=/logs \
---qlogger_path=/logs \
+--qlogger_path=/qlog \
 --host=0.0.0.0 \
 --congestion=cubic \
 --pacing=true \
