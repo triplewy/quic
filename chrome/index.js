@@ -13,10 +13,14 @@ const query = async (name, port, isQuic) => {
         '--allow-insecure-localhost',
         '--disk-cache-dir=/dev/null',
         '--disk-cache-size=1',
+        `--host-resolver-rules=MAP www.example.org:443 127.0.0.1:${port}`,
+
     ];
 
     if (isQuic) {
-        args.push(`--origin-to-force-quic-on=127.0.0.1:${port}`);
+        args.push(
+            '--origin-to-force-quic-on=www.example.org:443',
+        );
     }
 
     const browser = await puppeteer.launch({
@@ -41,8 +45,13 @@ const query = async (name, port, isQuic) => {
             console.log(`Executing scenario: ${size}-${num}`);
 
             await har.start({ path: harPath });
-            await page.goto(`https://127.0.0.1:${port}/${size}/index-${num}.html`);
-
+            try {
+                await page.goto(`https://www.example.org/${size}/index-${num}.html`, {
+                    timeout: 60000,
+                });
+            } catch (error) {
+                console.error(error);
+            }
             await har.stop();
             await page.close();
         }
@@ -56,6 +65,7 @@ const query = async (name, port, isQuic) => {
         { name: 'httpd', port: '30000', isQuic: false },
         { name: 'proxygen', port: '30001', isQuic: true },
         { name: 'quiche', port: '30002', isQuic: true },
+        { name: 'chromium', port: '30003', isQuic: true },
     ];
 
     for (const { name, port, isQuic } of versions) {

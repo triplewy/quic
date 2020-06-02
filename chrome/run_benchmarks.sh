@@ -6,6 +6,8 @@ sh ../http2/run_docker.sh
 sh ../proxygen/run_docker.sh
 # Start quiche docker
 sh ../quiche/run_docker.sh
+# Start chromium docker
+sh ../chromium/run_docker.sh
 
 # Start benchmarks
 node index.js

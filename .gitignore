@@ -2,3 +2,4 @@
 *.tar
 *.jpg
 node_modules
+qlog

@@ -7,5 +7,6 @@ docker run \
 -p 127.0.0.1:30002:4433/udp \
 -v $HOME/quic/www:/www \
 -v $HOME/quic/certs:/certs \
+-v $HOME/quic/qlog/quiche:/qlog \
 -d \
 quiche

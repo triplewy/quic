@@ -10,6 +10,7 @@ PORT=4433
 LOGLEVEL=4
 ROOT_DIR=/www
 CERTS_DIR=/certs
+QLOG_DIR=/qlog
 
 # Unless noted otherwise, test cases use HTTP/0.9 for file transfers.
 PROTOCOL="hq-${DRAFT}"
@@ -32,7 +33,7 @@ ${HQ_CLI} \
 --use_draft=true \
 --draft-version=${DRAFT} \
 --logdir=/logs \
---qlogger_path=/qlog \
+--qlogger_path=$QLOG_DIR \
 --host=0.0.0.0 \
 --congestion=cubic \
 --pacing=true \

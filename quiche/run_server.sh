@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
 
 export QLOGDIR="/qlog"
-mkdir -p $QLOGDIR
-
 QUICHE_CLI=/quiche-server
 ROOT_DIR=/www
 CERTS_DIR=/certs
