@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
 const puppeteer = require('puppeteer-core');
@@ -5,7 +6,7 @@ const PuppeteerHar = require('puppeteer-har');
 const path = require('path');
 const fs = require('fs');
 
-const query = async (name, port, isQuic) => {
+const query = async (name, port, isQuic, objectSize, numObjects) => {
     const args = [
         '--user-data-dir=/tmp/chrome-profile',
         '--enable-quic',
@@ -14,7 +15,6 @@ const query = async (name, port, isQuic) => {
         '--disk-cache-dir=/dev/null',
         '--disk-cache-size=1',
         `--host-resolver-rules=MAP www.example.org:443 127.0.0.1:${port}`,
-
     ];
 
     if (isQuic) {
@@ -29,47 +29,49 @@ const query = async (name, port, isQuic) => {
         args,
     });
 
-    const sizes = ['10kb', '100kb', '1000kb'];
-    const nums = ['1', '10', '100'];
+    const harDir = path.join('har', objectSize, name);
+    fs.mkdirSync(harDir, { recursive: true });
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const size of sizes) {
-        const harDir = path.join('har', name, size);
-        fs.mkdirSync(harDir, { recursive: true });
-        for (const num of nums) {
-            const page = await browser.newPage();
-            const har = new PuppeteerHar(page);
+    const page = await browser.newPage();
+    const har = new PuppeteerHar(page);
 
-            const harPath = path.join(harDir, `index-${num}.har`);
+    const harPath = path.join(harDir, `index-${numObjects}.har`);
 
-            console.log(`Executing scenario: ${size}-${num}`);
+    console.log(`Executing scenario: ${objectSize}-${numObjects}`);
 
-            await har.start({ path: harPath });
-            try {
-                await page.goto(`https://www.example.org/${size}/index-${num}.html`, {
-                    timeout: 60000,
-                });
-            } catch (error) {
-                console.error(error);
-            }
-            await har.stop();
-            await page.close();
-        }
+    await har.start({ path: harPath });
+    try {
+        await page.goto(`https://www.example.org/${objectSize}/index-${numObjects}.html`, {
+            timeout: 60000,
+        });
+    } catch (error) {
+        console.error(error);
     }
 
+    await har.stop();
+    await page.close();
     await browser.close();
 };
 
-(async () => {
-    const versions = [
-        { name: 'httpd', port: '30000', isQuic: false },
-        { name: 'proxygen', port: '30001', isQuic: true },
-        { name: 'quiche', port: '30002', isQuic: true },
-        { name: 'chromium', port: '30003', isQuic: true },
-    ];
+const [, , serverName, port, objectSize, numObjects] = process.argv;
 
-    for (const { name, port, isQuic } of versions) {
-        console.log(`Running benchmarks for ${name}`);
-        await query(name, port, isQuic);
-    }
+(async () => {
+    const isQuic = (() => {
+        switch (serverName) {
+            case 'http2':
+                return false;
+            case 'proxygen':
+                return true;
+            case 'quiche':
+                return true;
+            case 'chromium':
+                return true;
+            default:
+                throw Error;
+        }
+    })();
+
+    console.log(`Running benchmarks for { Name: ${serverName}, Object Size: ${objectSize}, Num Objects: ${numObjects} }`);
+
+    await query(serverName, port, isQuic, objectSize, numObjects);
 })();

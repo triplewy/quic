@@ -1,5 +1,7 @@
+.vscode
 .vagrant
 *.tar
 *.jpg
 node_modules
 qlog
+wireshark

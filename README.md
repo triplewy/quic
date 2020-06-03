@@ -10,9 +10,9 @@ Litespeed have open sourced their own QUIC [benchmarks](https://github.com/lites
 
 Another open sourced QUIC [benchmark](https://github.com/Shenggan/quic_vs_tcp)
 
-Great paper about robust QUIC benchmarking methodology: [Taking a Long Look at QUIC (Sigcomm '17)](https://conferences.sigcomm.org/imc/2017/papers/imc17-final39.pdf)
-
-Overall, there is no comprehensive, open-sourced QUIC/HTTP3 benchmark that compares multiple QUIC server implementations.
+### Papers
+- [Taking a Long Look at QUIC (Sigcomm '17)](https://conferences.sigcomm.org/imc/2017/papers/imc17-final39.pdf)
+- [Quicly now! Go take two pieces ofQuiche toQuinn! (Epqi '20)](https://qlog.edm.uhasselt.be/epiq/files/QUICandH3ImplementationDiversity_Marx_REVIEW9may2020.pdf)
 
 ## Benchmark Scenarios
 
@@ -30,8 +30,6 @@ For this benchmark, we will be ignoring **proxy**, **clients**, and **video qual
 - Web Page
   - Number of objects (images)
   - Object sizes (image sizes)
-
-Other types of scenarios? Namely video streaming? Would be difficult to implement optimized/consistent video streaming application across multiple implementations of QUIC
 
 ## Measuring Results
 
@@ -65,25 +63,15 @@ A diagram like the one above would be nice but might be out of scope for an indi
 
 ### Server
 - Facebook: [mvfst](https://github.com/facebookincubator/mvfst)/[proxygen](https://github.com/facebook/proxygen)
-- Microsoft: [msquic](https://github.com/microsoft/msquic)
 - Google: [chromium](https://www.chromium.org/quic/playing-with-quic)
-- Mozilla: [neqo](https://github.com/mozilla/neqo)
-- Litespeed: [lsquic](https://github.com/litespeedtech/lsquic)
+- Cloudflare: [quiche](https://github.com/cloudflare/quiche)
 
 There are many more QUIC implementations listed [here](https://github.com/quicwg/base-drafts/wiki/Implementations) 
 
 ## Discussion
 
-- Benchmark multiple QUIC clients as well?
-  - For instance, I'd imagine mvfst's client is optimized to work with mvfst's server
-- Benchmark congestion window handling? 
 - How to ensure statistical significance between results? 
-- Will ample configuration be required for each QUIC implementation?
 
+## Results
 
-## Timeline
-
-1. Get QUIC/HTTP3 servers up and running for at least 3 different implementations
-2. Create example web pages for each experiment
-3. Measure PLTs for each QUIC server without any network manipulation
-4. TBD
+[Results](RESULTS.md)
