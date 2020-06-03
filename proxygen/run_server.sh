@@ -38,7 +38,7 @@ ${HQ_CLI} \
 --conn_flow_control=${CONN_FLOW_CONTROL} \
 --stream_flow_control=${STREAM_FLOW_CONTROL} \
 --congestion=cubic \
---pacing=false \
+--pacing=true \
 --key=${CERTS_DIR}/leaf_cert.key \
 --cert=${CERTS_DIR}/leaf_cert.pem \
 --v=${LOGLEVEL} 2>&1 | tee /logs/server.log

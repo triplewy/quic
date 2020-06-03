@@ -20,30 +20,30 @@ Servers:
 
 ### Size: 10kb, Num objects: 100
 ![http2](./graphs/10kb/100/http2/graph.png)
-![chromium](./graphs/10kb/100/chromium/graph.png)
+<!-- ![chromium](./graphs/10kb/100/chromium/graph.png) -->
 ![proxygen](./graphs/10kb/100/proxygen/graph.png)
 ![quiche](./graphs/10kb/100/quiche/graph.png)
 
 ### Size: 100kb, Num objects: 100
 ![http2](./graphs/100kb/100/http2/graph.png)
-![chromium](./graphs/100kb/100/chromium/graph.png)
+<!-- ![chromium](./graphs/100kb/100/chromium/graph.png) -->
 ![proxygen](./graphs/100kb/100/proxygen/graph.png)
 ![quiche](./graphs/100kb/100/quiche/graph.png)
 
 ### Size: 10kb, Num objects: 10
 ![http2](./graphs/10kb/10/http2/graph.png)
-![chromium](./graphs/10kb/10/chromium/graph.png)
+<!-- ![chromium](./graphs/10kb/10/chromium/graph.png) -->
 ![proxygen](./graphs/10kb/10/proxygen/graph.png)
 ![quiche](./graphs/10kb/10/quiche/graph.png)
 
 ### Size: 100kb, Num objects: 10
 ![http2](./graphs/100kb/10/http2/graph.png)
-![chromium](./graphs/100kb/10/chromium/graph.png)
+<!-- ![chromium](./graphs/100kb/10/chromium/graph.png) -->
 ![proxygen](./graphs/100kb/10/proxygen/graph.png)
 ![quiche](./graphs/100kb/10/quiche/graph.png)
 
 ### Size: 1000kb, Num objects: 1
 ![http2](./graphs/1000kb/1/http2/graph.png)
-![chromium](./graphs/1000kb/1/chromium/graph.png)
+<!-- ![chromium](./graphs/1000kb/1/chromium/graph.png) -->
 ![proxygen](./graphs/1000kb/1/proxygen/graph.png)
 ![quiche](./graphs/1000kb/1/quiche/graph.png)
