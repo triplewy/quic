@@ -6,11 +6,6 @@ Accurately benchmark multiple QUIC implementations to find areas of improvement.
 
 ## Related Works
 
-Litespeed have open sourced their own QUIC [benchmarks](https://github.com/litespeedtech/lsquic). 
-
-Another open sourced QUIC [benchmark](https://github.com/Shenggan/quic_vs_tcp)
-
-### Papers
 - [Taking a Long Look at QUIC (Sigcomm '17)](https://conferences.sigcomm.org/imc/2017/papers/imc17-final39.pdf)
 - [Quicly now! Go take two pieces ofQuiche toQuinn! (Epqi '20)](https://qlog.edm.uhasselt.be/epiq/files/QUICandH3ImplementationDiversity_Marx_REVIEW9may2020.pdf)
 
