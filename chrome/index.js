@@ -3,10 +3,12 @@
 /* eslint-disable no-await-in-loop */
 const puppeteer = require('puppeteer-core');
 const PuppeteerHar = require('puppeteer-har');
+const lighthouse = require('lighthouse');
+const chromeLauncher = require('chrome-launcher');
 const path = require('path');
 const fs = require('fs');
 
-const query = async (name, port, isQuic, objectSize, numObjects) => {
+const chromeArgs = (port, isQuic) => {
     const args = [
         '--user-data-dir=/tmp/chrome-profile',
         '--enable-quic',
@@ -23,6 +25,11 @@ const query = async (name, port, isQuic, objectSize, numObjects) => {
         );
     }
 
+    return args;
+};
+
+
+const query = async (name, args, objectSize, numObjects) => {
     const browser = await puppeteer.launch({
         headless: false,
         executablePath: '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary',
@@ -53,6 +60,34 @@ const query = async (name, port, isQuic, objectSize, numObjects) => {
     await browser.close();
 };
 
+const launchChromeAndRunLighthouse = (url, chromeFlags, config = null) => {
+    // Set path of chrome executable
+    process.env.CHROME_PATH = '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary';
+
+
+    chromeLauncher.launch({ chromeFlags }).then((chrome) => {
+        const opts = {
+            port: chrome.port,
+            onlyCategories: ['performance'],
+            chromeFlags,
+        };
+
+        return lighthouse(url, opts, config).then((results) => {
+            // use results.lhr for the JS-consumable output
+            // https://github.com/GoogleChrome/lighthouse/blob/master/types/lhr.d.ts
+            // use results.report for the HTML/JSON/CSV output as a string
+            // use results.artifacts for the trace/screenshots/other specific case you need (rarer)
+            chrome.kill().then(() => {
+                // console.log(results.report);
+                console.log(typeof results.report);
+
+                fs.writeFileSync(path.join('lighthouse', 'index.html'), results.report);
+                // console.log(results.lhr);
+            });
+        });
+    });
+};
+
 const [, , serverName, port, objectSize, numObjects] = process.argv;
 
 (async () => {
@@ -73,5 +108,7 @@ const [, , serverName, port, objectSize, numObjects] = process.argv;
 
     console.log(`Running benchmarks for { Name: ${serverName}, Object Size: ${objectSize}, Num Objects: ${numObjects} }`);
 
-    await query(serverName, port, isQuic, objectSize, numObjects);
+    const args = chromeArgs(port, isQuic);
+    // launchChromeAndRunLighthouse(`https://www.example.org/${objectSize}/index-${numObjects}.html`, args);
+    await query(serverName, args, objectSize, numObjects);
 })();

@@ -25,10 +25,10 @@
 - [x] JS files to automate loading pages
 
 ## Analyze HAR files
-- [ ] Write scripts to analyze HAR files and extract network load times
-- [ ] Create graphs based off of HAR data
+- [x] Write scripts to analyze HAR files and extract network load times
+- [x] Create graphs based off of HAR data
 
-## Tune Quic implementations
+## Tune QUIC implementations
 - [ ] Analyze qlog files and compare with TCP packet capture
 - [ ] Proxygen - Facebook
 - [ ] Quiche - Cloudflare

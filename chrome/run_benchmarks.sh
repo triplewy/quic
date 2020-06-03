@@ -1,8 +1,12 @@
 #!/bin/bash
 
+# SIZES="10kb 100kb 1000kb"
+# NUM_OBJECTS="1 10 100"
+
 SIZES="10kb 100kb"
 NUM_OBJECTS="10 100"
-SERVERS=(http2 proxygen quiche chromium)
+# SERVERS=(http2 proxygen quiche chromium)
+SERVERS=(proxygen)
 PORTS=(30000 30001 30002 30003)
 
 for SIZE in $SIZES
@@ -20,7 +24,7 @@ do
             QLOG_DIR=$HOME/quic/qlog/$SIZE/$NUM_OBJECT/$SERVER
             mkdir -p $QLOG_DIR
             
-            # Start docker container
+            # # Start docker container
             sh ../$SERVER/run_docker.sh $QLOG_DIR $PORT
             
             # Start wireshark
@@ -31,7 +35,8 @@ do
             -i lo0 \
             -f "tcp src port $PORT or tcp dst port $PORT or udp src port $PORT or udp dst port $PORT" \
             -a duration:5 \
-            -a packets:20 \
+            -a packets:50 \
+            -o tls.keylog_file:$HOME/wireshark/sslkeylog.log \
             -w $WIRESHARK_DIR/capture.pcapng &
             
             sleep 1

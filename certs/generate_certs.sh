@@ -20,7 +20,7 @@ try openssl req \
 -out out/2048-sha256-root.req \
 -config ca.cnf
 try openssl x509 \
--req -days 3 \
+-req -days 365 \
 -in out/2048-sha256-root.req \
 -signkey out/2048-sha256-root.key \
 -extfile ca.cnf \
@@ -43,7 +43,7 @@ try openssl pkcs8 \
 # Generate the leaf certificate to be valid for three days.
 try openssl ca \
 -batch \
--days 3 \
+-days 365 \
 -extensions user_cert \
 -in out/leaf_cert.req \
 -out out/leaf_cert.pem \

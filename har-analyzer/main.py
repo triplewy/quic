@@ -31,15 +31,26 @@ def plot(title: str, page: str, entries: object):
     plt.ylim(0, len(entries) + 1)
 
     if size == '10kb':
-        if numObjects == '10':
+        if numObjects == '1':
+            plt.xlim(0, 500)
+        elif numObjects == '10':
             plt.xlim(0, 1500)
         elif numObjects == '100':
             plt.xlim(0, 5000)
     elif size == '100kb':
-        if numObjects == '10':
+        if numObjects == '1':
+            plt.xlim(0, 1000)
+        elif numObjects == '10':
             plt.xlim(0, 5000)
         elif numObjects == '100':
             plt.xlim(0, 15000)
+    elif size == '1000kb':
+        if numObjects == '1':
+            plt.xlim(0, 3000)
+        elif numObjects == '10':
+            plt.xlim(0, 10000)
+        elif numObjects == '100':
+            plt.xlim(0, 20000)
 
     plt.autoscale(False)
     plt.xlabel('Time (ms)')
@@ -94,6 +105,7 @@ def plot(title: str, page: str, entries: object):
         os.remove(graph_file)
 
     fig.savefig(graph_file, dpi=fig.dpi)
+    plt.close(fig=fig)
 
 
 def main():
