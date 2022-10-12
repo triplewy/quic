@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "chrome-launcher": "^0.13.2",
-    "lighthouse": "^6.0.0",
+    "lighthouse": "^9.6.7",
     "puppeteer-core": "^3.2.0",
     "puppeteer-har": "^1.1.2"
   },
